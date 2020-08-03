@@ -3,7 +3,7 @@ import axios from 'axios'
 import useInput from '../../hooks/useInput'
 import { useHistory } from 'react-router-dom'
 
-const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/"
+export const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/"
 
 function PageLogin() {
 
