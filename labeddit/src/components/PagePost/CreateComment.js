@@ -1,8 +1,9 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
 import useInput from '../../hooks/useInput'
-import {baseUrl} from '../PageLogin/PageLogin'
+import { baseUrl } from '../PageLogin/PageLogin'
 import PostDetailContext from '../../contexts/PostDetailContext'
+import requestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
 function CreateComment(props) {
 
@@ -11,6 +12,7 @@ function CreateComment(props) {
     })
 
     const post = useContext(PostDetailContext)
+    const request = useContext(requestDetailPostContext)
 
     const handleInputChange = (event) => {
         const {name, value} = event.target
@@ -37,7 +39,7 @@ function CreateComment(props) {
         .then((response) => {
             alert("Você comentou com sucesso")
             resetaEntrada()
-            props.requestDetailPost()
+            request()
         })
         .catch((error) => {
             alert(error.message)

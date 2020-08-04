@@ -1,11 +1,13 @@
-import React, {useReducer, useContext} from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
-import {baseUrl} from '../PageLogin/PageLogin'
+import { baseUrl } from '../PageLogin/PageLogin'
 import PostDetailContent from '../../contexts/PostDetailContext'
+import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
 function VoteComment(props) {
 
     const post = useContext(PostDetailContent)
+    const request = useContext(RequestDetailPostContext)
 
     const onClickGostei = () => {
         const body = {
@@ -41,7 +43,7 @@ function VoteComment(props) {
         })
         .then((response) => {
             alert("Você votou")
-            props.requestDetailPost()
+            request()
         })
         .catch((error) => {
             alert(error.message)

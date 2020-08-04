@@ -1,11 +1,14 @@
 import React, { useEffect, useReducer } from 'react'
-import PostDetailContext from '../../contexts/PostDetailContext'
-import {baseUrl} from '../PageLogin/PageLogin'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import {initialState, PostReducer} from './PostReducer'
-import VoteComment from './VoteComment'
+import { baseUrl } from '../PageLogin/PageLogin'
+import { initialState, PostReducer } from './PostReducer'
+import RenderPost from './RenderPost'
+import RenderComments from './RenderComments'
 import CreateComment from './CreateComment'
+import PostDetailContext from '../../contexts/PostDetailContext'
+import CommentsContext from '../../contexts/CommentsContext'
+import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
 const idChumbado = "cVTfOlpsCVZMsRNzZ6mr"
 
@@ -54,41 +57,20 @@ function PagePost() {
         history.push("/feed")
     }
 
-    console.log(state.post)
-    console.log(state.comment)
-
     return(
         <PostDetailContext.Provider value={state.post}>
-            <div>
-                <h1>Post</h1>
-                <p>{state.post.username}</p>
-                <p>{state.post.title}</p> 
-                <p>{state.post.text} </p>
-                <p>{state.post.votesCount}</p> 
-                <p>{state.post.commentsCount}</p>
-            </div>
-            <div>
-                <CreateComment 
-                    requestDetailPost = {requestDetailPost}
-                />
-            </div>
-            <div>
-                <h1>Comentários</h1>
-                {state.comment.map((comentario) => {
-                    return (
-                        <div key={comentario.id}>
-                            <p>{comentario.username}</p>
-                            <p>{comentario.text}</p>
-                            <p>{comentario.votesCount}</p>
-                            <VoteComment
-                                requestDetailPost = {requestDetailPost} 
-                                commentId={comentario.id}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
-            <button onClick={goToPageFeed}> Voltar </button>
+            <RequestDetailPostContext.Provider value={requestDetailPost}>
+                <div>
+                    <RenderPost />
+                </div>
+                <div>
+                    <CreateComment />
+                </div>
+                <CommentsContext.Provider value={state.comment}>
+                    <RenderComments />
+                </CommentsContext.Provider>
+                <button onClick={goToPageFeed}> Voltar </button>
+            </RequestDetailPostContext.Provider>
         </PostDetailContext.Provider>
     )
 }
