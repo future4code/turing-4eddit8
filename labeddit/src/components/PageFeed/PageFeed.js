@@ -34,10 +34,6 @@ function PageFeed() {
         criaPost()
     }
 
-    const onClickLogout = () => {
-        history.push("/")
-    }
-
     useEffect(()=>{
         pegaPosts()
     },[])
@@ -163,7 +159,6 @@ function PageFeed() {
 
     return (
         <div>
-            <button onClick={onClickLogout}>Logout</button>
             <form onSubmit={handleSave}>
                 <input onChange={handleInputChange} name={"tituloPost"} value={form.tituloPost} placeholder={"Escreva o titulo do seu Post"} type={"text"} required/>
                 <input onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
