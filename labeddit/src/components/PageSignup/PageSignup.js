@@ -1,22 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios';
+import useInput from '../../hooks/useInput'
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
-
-const useForm = initialValues => {
-    const [form, setForm] = useState(initialValues);
-  
-    const onChange = (name, value) => {
-      const newForm = { ...form, [name]: value };
-      setForm(newForm);
-    };
-  
-    return { form, onChange };
-};
   
 function PageSignup() {
-    const { form, onChange } = useForm({
+
+    const { form, onChange, resetaEntrada } = useInput({
         nomeUsuario: "",
         email: "",
         senha: ""
@@ -30,12 +21,16 @@ function PageSignup() {
         onChange(name, value);
     };
 
+    const handleSave = (event) => {
+        event.preventDefault()
+        cadastrar()
+    }
+
     const goToLogin = () => {
         history.push("/")
     }
 
-    const cadastrar=(event)=>{
-        event.preventDefault()
+    const cadastrar=()=>{
         const body ={
             "email": form.email,
             "password": form.senha,
@@ -44,8 +39,9 @@ function PageSignup() {
         axios
         .post(`${url}/signup`, body)
         .then(response=>{
-            console.log(response.data)
             history.push("/")
+            resetaEntrada()
+            window.localStorage.setItem("token", response.data.token)
         })
         .catch(err=>{
             console.log(err.message)
@@ -56,7 +52,7 @@ function PageSignup() {
         <div>
             <button onClick={goToLogin}>Voltar</button>
             Page=>Signup
-            <form onSubmit={cadastrar}>
+            <form onSubmit={handleSave}>
                 <input onChange={handleInputChange} name={"nomeUsuario"} value={form.nomeUsuario} placeholder={"Nome de usuário"} type={"text"} required/>
                 <input onChange={handleInputChange} name={"email"} value={form.email} placeholder={"Email"} type={"email"} required/>
                 <input onChange={handleInputChange} name={"senha"} value={form.senha} placeholder={"Senha"} type={"password"} required/>
