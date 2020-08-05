@@ -29,8 +29,8 @@ function PageFeed() {
     const history = useHistory()
     const pathParams = useParams()
 
-    const goToPost = () => {
-        history.push("/post/1234")
+    const goToPost = (idPost) => {
+        history.push(`/post/${idPost}`)
     }
 
     const handleInputChange = event => {
@@ -147,7 +147,6 @@ function PageFeed() {
 
     return (
         <div>
-            <button onClick={goToPost}>Mais detalhes</button>
             <button onClick={onClickLogout}>Logout</button>
             <form onSubmit={criaPost}>
                 <input onChange={handleInputChange} name={"tituloPost"} value={form.tituloPost} placeholder={"Escreva o titulo do seu Post"} type={"text"} required/>
@@ -158,6 +157,7 @@ function PageFeed() {
                 return (
                         <div>
                             <div>
+                                <button onClick={goToPost(post.id)}>i</button>
                                 <h2>{post.username}</h2>
                                 <div>
                                     <h3>{post.title}</h3>
