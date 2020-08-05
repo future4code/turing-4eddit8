@@ -36,7 +36,7 @@ function PagePost() {
     const requestDetailPost = () => {
         const token = window.localStorage.getItem("token")
 
-        axios.get(`${baseUrl}posts/${idChumbado}`, {
+        axios.get(`${baseUrl}posts/${pathParams.id}`, {
             headers: {
                 Authorization: token
             }
