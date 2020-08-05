@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+
 import PostDetailContext from '../../contexts/PostDetailContext'
 
 function RenderPost() {

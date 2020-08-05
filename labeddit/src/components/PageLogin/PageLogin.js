@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+
 import useInput from '../../hooks/useInput'
 
 export const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/"
@@ -13,6 +14,14 @@ function PageLogin() {
         senha: ""
     })
 
+    useEffect(() => {
+        const token = window.localStorage.getItem("token")
+
+        if (token !== null) {
+            history.replace("/feed")
+        }
+    }, [])
+
     const handleInputChange = (event) => {
         const {name, value} = event.target
         onChange(name, value)
@@ -24,7 +33,6 @@ function PageLogin() {
     }
 
     const onClickLogin = () => {
-
         const body = {
             email: form.email,
             password: form.senha

@@ -1,20 +1,25 @@
 import React, { useEffect, useReducer } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+
 import { baseUrl } from '../PageLogin/PageLogin'
-import { initialState, PostReducer } from './PostReducer'
+import { initialState, PostReducer } from '../../reducers/PostReducer'
+
 import RenderPost from './RenderPost'
 import RenderComments from './RenderComments'
 import CreateComment from './CreateComment'
+
 import PostDetailContext from '../../contexts/PostDetailContext'
 import CommentsContext from '../../contexts/CommentsContext'
 import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
+import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
 const idChumbado = "cVTfOlpsCVZMsRNzZ6mr"
 
 function PagePost() {
 
     const history = useHistory()
+    const pathParams = useParams()
     const [state, dispatch] = useReducer(PostReducer, initialState)
 
     useEffect(() => {
@@ -44,6 +49,22 @@ function PagePost() {
         })  
     }
 
+    const requestVoteComment = (body, postId, commentId ) => {
+        const token = window.localStorage.getItem("token")
+
+        axios.put(`${baseUrl}posts/${postId}/comment/${commentId}/vote`, body, {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then((response) => {
+            requestDetailPost()
+        })
+        .catch((error) => {
+            alert(error.message)
+        })
+    }
+
     const handleMoreDetailsPost = (Post) => {
         const moreDetailsPost = {
             type: "Renderizar",
@@ -67,7 +88,9 @@ function PagePost() {
                     <CreateComment />
                 </div>
                 <CommentsContext.Provider value={state.comment}>
-                    <RenderComments />
+                    <RequestVoteCommentContext.Provider value={requestVoteComment}>
+                        <RenderComments />
+                    </RequestVoteCommentContext.Provider>
                 </CommentsContext.Provider>
                 <button onClick={goToPageFeed}> Voltar </button>
             </RequestDetailPostContext.Provider>

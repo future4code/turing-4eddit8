@@ -1,13 +1,12 @@
 import React, { useContext } from 'react'
-import axios from 'axios'
-import { baseUrl } from '../PageLogin/PageLogin'
+
 import PostDetailContent from '../../contexts/PostDetailContext'
-import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
+import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
 function VoteComment(props) {
 
     const post = useContext(PostDetailContent)
-    const request = useContext(RequestDetailPostContext)
+    const requestVoteComment = useContext(RequestVoteCommentContext)
 
     const onClickGostei = () => {
         const body = {
@@ -23,7 +22,7 @@ function VoteComment(props) {
 
     const onClickNaoGostei = () => {
         const body = {
-            direction: 0
+            direction: -1
         }
 
         const commentId = props.commentId
@@ -31,23 +30,6 @@ function VoteComment(props) {
         const postId = post.id
 
         requestVoteComment(body, postId, commentId)
-    }
-
-    const requestVoteComment = (body, postId, commentId ) => {
-        const token = window.localStorage.getItem("token")
-
-        axios.put(`${baseUrl}posts/${postId}/comment/${commentId}/vote`, body, {
-            headers: {
-                Authorization: token
-            }
-        })
-        .then((response) => {
-            alert("Você votou")
-            request()
-        })
-        .catch((error) => {
-            alert(error.message)
-        })
     }
 
     return (
