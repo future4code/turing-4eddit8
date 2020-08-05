@@ -55,7 +55,7 @@ function PageSignup() {
     return (
         <div>
             <button onClick={goToLogin}>Voltar</button>
-            PageSignup
+            Page=>Signup
             <form onSubmit={cadastrar}>
                 <input onChange={handleInputChange} name={"nomeUsuario"} value={form.nomeUsuario} placeholder={"Nome de usuário"} type={"text"} required/>
                 <input onChange={handleInputChange} name={"email"} value={form.email} placeholder={"Email"} type={"email"} required/>
