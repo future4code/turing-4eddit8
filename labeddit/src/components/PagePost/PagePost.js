@@ -14,8 +14,6 @@ import CommentsContext from '../../contexts/CommentsContext'
 import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
-const idChumbado = "cVTfOlpsCVZMsRNzZ6mr"
-
 function PagePost() {
 
     const history = useHistory()
