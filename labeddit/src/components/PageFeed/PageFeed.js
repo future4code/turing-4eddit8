@@ -174,7 +174,7 @@ function PageFeed() {
                     return (
                         <div key={post.id}>
                             <div>
-                                <button onClick={()=>goToPost(post.id)}>i</button>
+                                <button onClick={()=>goToPost(post.id)}>Detalhes post</button>
                                 <h2>{post.username}</h2>
                                 <div>
                                     <h3>{post.title}</h3>
