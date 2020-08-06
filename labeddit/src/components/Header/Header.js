@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import styled from "styled-components"
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 
 const Cabecalho = styled.header`
 background-color: black;
@@ -23,20 +23,19 @@ border-radius: 2px;
 
 function Header() {
 
-    const [atualizaEstado, setAtualizaEstado] = useState(false)
+    const pathParams = useParams()
 
     const history = useHistory()
     const token = window.localStorage.getItem("token")
 
     const logout = () => {
         window.localStorage.clear()
-        setAtualizaEstado(!atualizaEstado)
         history.push("/")
     }
 
     useEffect(() => {
         renderizaNaTela()
-    }, [atualizaEstado, token])
+    }, [pathParams])
 
     const renderizaNaTela = () => {
         if (token !== null) {

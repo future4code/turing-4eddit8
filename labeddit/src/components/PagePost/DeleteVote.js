@@ -24,7 +24,7 @@ function DeleteVote(props) {
 
     return (
         <div>
-            <button onClick={onClickDeleteVote}>Remover voto</button>
+            <button onClick={onClickDeleteVote}>0</button>
         </div>
     )
 }

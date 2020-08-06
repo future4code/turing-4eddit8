@@ -13,18 +13,6 @@ function RenderComments() {
         <div>
             <h1>Comentários</h1>
             {comment.map((comentario) => {
-                if (comentario.userVoteDirection === 0) {
-                    return (
-                        <div key={comentario.id}>
-                            <p>{comentario.username}</p>
-                            <p>{comentario.text}</p>
-                            <p>{comentario.votesCount}</p>
-                            <VoteComment 
-                                commentId={comentario.id}
-                            />
-                        </div>
-                    )
-                } else {
                     return (
                         <div key={comentario.id}>
                             <p>{comentario.username}</p>
@@ -37,8 +25,7 @@ function RenderComments() {
                                 commentId={comentario.id}
                             />
                         </div>
-                    )
-                }   
+                    ) 
             })}
         </div>
     )

@@ -34,8 +34,8 @@ function VoteComment(props) {
 
     return (
         <div>
-            <button onClick={onClickGostei}>Gostei</button>
-            <button onClick={onClickNaoGostei}>Não gostei</button>
+            <button onClick={onClickGostei}>↑</button>
+            <button onClick={onClickNaoGostei}>↓</button>
         </div>
     )
 }
