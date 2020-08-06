@@ -19,6 +19,15 @@ function PageFeed() {
     const history = useHistory()
     const pathParams = useParams()
 
+    useEffect(() => {
+        const token = window.localStorage.getItem("token")
+
+        if (token === null) {
+            history.push("/")
+        }
+
+    }, [])
+
     const goToPost = (idPost) => {
         history.push(`/post/${idPost}`)
     }
