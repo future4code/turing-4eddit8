@@ -8,7 +8,7 @@ display: flex;
 align-items: center;
 width: 100%;
 height: 10vh;
-position: fixed;
+position: relative;
 bottom: 0;
 `
 

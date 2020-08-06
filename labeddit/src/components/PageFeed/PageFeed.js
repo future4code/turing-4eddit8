@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios';
 import useInput from '../../hooks/useInput'
+import {Botao, ContainerCard, ContainerCards, 
+ContainerInfo, TextoPostagem, 
+TituloPostagem, ContainerPostagem, FormularioPostagem} from "../PageLogin/StylePageLogin"
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
 const token = window.localStorage.getItem("token")
@@ -131,8 +134,6 @@ function PageFeed() {
     const onChangeInput =(event)=>{
         setComentario(event.target.value)
     }
-
-
     /* const comentar = (postId)=>{
         if(comentario !== ""){
             const body ={
@@ -157,27 +158,47 @@ function PageFeed() {
 
     return (
         <div>
-            <form onSubmit={handleSave}>
-                <input onChange={handleInputChange} name={"tituloPost"} value={form.tituloPost} placeholder={"Escreva o titulo do seu Post"} type={"text"} required/>
-                <input onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
-                <button>Criar Post</button>
-            </form>
+            <div>
+                <h1>Criar publicação</h1>
+                <ContainerPostagem>
+                    <FormularioPostagem onSubmit={handleSave}>
+                        <TituloPostagem onChange={handleInputChange} name={"tituloPost"} value={form.tituloPost} placeholder={"Escreva o titulo do seu Post"} type={"text"} required/>
+                        <div>
+                        <TextoPostagem onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
+                        </div>
+                        <button>Criar Post</button>
+                    </FormularioPostagem>
+                </ContainerPostagem>
+            </div>
              {post.map((post)=>{
 
                     return (
-                        <div key={post.id}>
-                            <div>
-                                <button onClick={()=>goToPost(post.id)}>Detalhes post</button>
-                                <h2>{post.username}</h2>
-                                <div>
-                                    <h3>{post.title}</h3>
-                                    <p>{post.text}</p>
-                                </div>
-                               <button onClick={()=> curtir(post)}>Like</button> <span>{post.votesCount}</span> <button onClick={()=> naoCurti(post)}>Deslike</button> //<span>{post.commentsCount}</span>
-                               {/* <input placeholder={"Comentar"} value={comentario} onChange={onChangeInput}/> <button onClick={()=> comentar(post.id)}>Comentar</button> */}
-                            </div>
+                        <ContainerCards key={post.id}>
+                            <ContainerCard>
+                                <ContainerInfo onClick={()=>goToPost(post.id)}>
+                                    <h2>{post.username}</h2>
+                                    <div>
+                                        <h3>{post.title}</h3>
+                                        <p>{post.text}</p>
+                                    </div>
+                                    <p>Comentários: {post.commentsCount}</p>
+                                </ContainerInfo>
+                                    <div>
+                                        <Botao 
+                                        cor={post.userVoteDirection === 1 ? "green" : "white"}
+                                        corTexto={post.userVoteDirection === 1 ? "white" : "black"}
+                                        onClick={()=> curtir(post)}>↑
+                                        </Botao>
+                                        <span>{post.votesCount}</span>
+                                        <Botao 
+                                        cor={post.userVoteDirection === -1 ? "red" : "white"}
+                                        corTexto={post.userVoteDirection === -1 ? "white" : "black"}
+                                        onClick={()=> naoCurti(post)}>↓
+                                        </Botao>
+                                    </div>
+                            </ContainerCard>
             
-                        </div>
+                        </ContainerCards>
                         )
             })}
         </div>
@@ -185,3 +206,4 @@ function PageFeed() {
 }
 
 export default PageFeed
+{/* <input placeholder={"Comentar"} value={comentario} onChange={onChangeInput}/> <button onClick={()=> comentar(post.id)}>Comentar</button> */}
