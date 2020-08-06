@@ -4,49 +4,48 @@ import axios from 'axios';
 import useInput from '../../hooks/useInput'
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdYcDRYT2pNREZxZGxnM2Q1dHRqIiwiZW1haWwiOiJ2aW55QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidmlueXR1cmluZyIsImlhdCI6MTU5NjU2MzY2MH0.8jJdCqYjasydjXUiT_9tNOD5IF2Rn5WJKXqRDws50ic"
-
+const token = window.localStorage.getItem("token")
 function PageFeed() {
-
+    
     const { form, onChange, resetaEntrada } = useInput({
         textoPost: "",
         tituloPost: ""
-      });
+    });
     
     const [post, setPost]= useState([])
     const [comentario, setComentario]= useState("")
-
+    
     const history = useHistory()
     const pathParams = useParams()
-
+    
     useEffect(() => {
         const token = window.localStorage.getItem("token")
-
+        
         if (token === null) {
             history.push("/")
         }
-
+        
     }, [])
-
+    
     const goToPost = (idPost) => {
         history.push(`/post/${idPost}`)
     }
-
+    
     const handleInputChange = event => {
         const { name, value} = event.target;
-    
+        
         onChange(name, value);
     }
-
+    
     const handleSave = (event) => {
         event.preventDefault()
         criaPost()
     }
-
+    
     useEffect(()=>{
         pegaPosts()
     },[])
-
+    
     const pegaPosts = ()=>{
         axios
         .get(`${url}/posts`,{
@@ -62,7 +61,7 @@ function PageFeed() {
             console.log(err.message)
         })
     }
-
+    
     const criaPost = () => {
         const body={
             "text": form.textoPost,
@@ -82,13 +81,39 @@ function PageFeed() {
             console.log(err.message)
         })
     }
-
-    const curtir = (idPost)=>{
-        const body={
-            "direction": 1
+    
+    const curtir = (post)=>{
+        if(post.userVoteDirection !== 1){
+            const body={
+                "direction": 1
+            }
+            votar(post, body)
+        }else{
+            removerVoto(post)
         }
+    }
+    
+    const naoCurti = (post)=>{
+        if(post.userVoteDirection !== -1){
+            const body={
+                "direction": -1
+            }
+            votar(post, body)
+        }else{
+            removerVoto(post)
+        }
+    }
+    
+    const removerVoto = (post) => {
+        const body={
+            "direction": 0
+        }
+        votar(post, body)
+    }
+    
+    const votar = (post, body)=>{
         axios
-        .put(`${url}/posts/${idPost}/vote`, body, {
+        .put(`${url}/posts/${post.id}/vote`, body, {
             headers:{
                 Authorization: token
             }
@@ -101,48 +126,12 @@ function PageFeed() {
             console.log(err.message)
         })
     }
-
-    const naoCurti = (idPost)=>{
-        const body={
-            "direction": -1
-        }
-        axios
-        .put(`${url}/posts/${idPost}/vote`, body, {
-            headers:{
-                Authorization: token
-            }
-        })
-        .then(()=>{
-            pegaPosts()
-            console.log("Entrei no then")
-        })
-        .catch(err=>{
-            console.log(err.message)
-        })
-    }
-
+    
+    
     const onChangeInput =(event)=>{
         setComentario(event.target.value)
     }
 
-    const onClickRemoverVoto = (idPost) => {
-        const body={
-            "direction": 0
-        }
-        axios
-        .put(`${url}/posts/${idPost}/vote`, body, {
-            headers:{
-                Authorization: token
-            }
-        })
-        .then(()=>{
-            pegaPosts()
-            console.log("Entrei no then")
-        })
-        .catch(err=>{
-            console.log(err.message)
-        })
-    }
 
     /* const comentar = (postId)=>{
         if(comentario !== ""){
@@ -174,7 +163,7 @@ function PageFeed() {
                 <button>Criar Post</button>
             </form>
              {post.map((post)=>{
-                 if (post.userVoteDirection === 0) {
+
                     return (
                         <div key={post.id}>
                             <div>
@@ -184,31 +173,12 @@ function PageFeed() {
                                     <h3>{post.title}</h3>
                                     <p>{post.text}</p>
                                 </div>
-                               <button onClick={()=> curtir(post.id)}>Like</button> <span>{post.votesCount}</span> <button onClick={()=> naoCurti(post.id)}>Deslike</button> //<span>{post.commentsCount}</span>
+                               <button onClick={()=> curtir(post)}>Like</button> <span>{post.votesCount}</span> <button onClick={()=> naoCurti(post)}>Deslike</button> //<span>{post.commentsCount}</span>
                                {/* <input placeholder={"Comentar"} value={comentario} onChange={onChangeInput}/> <button onClick={()=> comentar(post.id)}>Comentar</button> */}
                             </div>
             
                         </div>
                         )
-                 } else {
-                    return (
-                        <div key={post.id}>
-                            <div>
-                                <button onClick={()=>goToPost(post.id)}>Detalhes post</button>
-                                
-                                <h2>{post.username}</h2>
-                                <div>
-                                    <h3>{post.title}</h3>
-                                    <p>{post.text}</p>
-                                </div>
-                               <button onClick={()=> curtir(post.id)}>Like</button> <span>{post.votesCount}</span> <button onClick={()=> naoCurti(post.id)}>Deslike</button> <button onClick={() => onClickRemoverVoto(post.id)}>Remover Voto</button> //  <span>{post.commentsCount}</span> 
-                               {/* <input placeholder={"Comentar"} value={comentario} onChange={onChangeInput}/> <button onClick={()=> comentar(post.id)}>Comentar</button> */}
-                            </div>
-            
-                        </div>
-                    )
-                 }
-                
             })}
         </div>
     )
