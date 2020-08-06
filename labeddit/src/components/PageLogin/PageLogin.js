@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
 import useInput from '../../hooks/useInput'
+import {ContainerLogin, FormularioLogin, ContainerInput, BotaoLogin} from './StylePageLogin'
 
 export const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/"
 
@@ -55,24 +56,32 @@ function PageLogin() {
     }
     
     return (
-        <div>
-            <form onSubmit={handleSave}>
-                <input 
-                    name="email" 
-                    type="email" 
-                    value={form.email} 
-                    onChange={handleInputChange} 
-                />
-                <input 
-                    name="senha" 
-                    type="password" 
-                    value={form.senha} 
-                    onChange={handleInputChange} 
-                />
-                <button>Login</button>
-            </form>
+        <ContainerLogin>
+            <FormularioLogin onSubmit={handleSave}>
+                <ContainerInput>
+                    <label>Login</label>
+                    <input 
+                        name="email" 
+                        type="email" 
+                        value={form.email} 
+                        onChange={handleInputChange} 
+                    />
+                </ContainerInput>
+                <ContainerInput>
+                    <label>Senha</label>
+                    <input 
+                        name="senha" 
+                        type="password" 
+                        value={form.senha} 
+                        onChange={handleInputChange} 
+                    />
+                </ContainerInput>
+                <ContainerInput>
+                    <BotaoLogin>Login</BotaoLogin>
+                </ContainerInput>
+            </FormularioLogin>
             <button onClick={goToSignUp}>Cadastrar</button>
-        </div>
+        </ContainerLogin>
     )
 }
 
