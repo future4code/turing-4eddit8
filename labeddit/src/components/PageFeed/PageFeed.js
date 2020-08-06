@@ -4,7 +4,7 @@ import axios from 'axios';
 import useInput from '../../hooks/useInput'
 import {Botao, ContainerCard, ContainerCards, 
 ContainerInfo, TextoPostagem, 
-TituloPostagem, ContainerPostagem, FormularioPostagem} from "../PageLogin/StylePageLogin"
+TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao} from "../PageLogin/StylePageLogin"
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
 const token = window.localStorage.getItem("token")
@@ -159,12 +159,14 @@ function PageFeed() {
     return (
         <div>
             <div>
-                <h1>Criar publicação</h1>
+                <ContainerPublicacao>
+                    <h1>Criar publicação</h1>
+                </ContainerPublicacao>
                 <ContainerPostagem>
                     <FormularioPostagem onSubmit={handleSave}>
                         <TituloPostagem onChange={handleInputChange} name={"tituloPost"} value={form.tituloPost} placeholder={"Escreva o titulo do seu Post"} type={"text"} required/>
                         <div>
-                        <TextoPostagem onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
+                            <TextoPostagem onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
                         </div>
                         <button>Criar Post</button>
                     </FormularioPostagem>

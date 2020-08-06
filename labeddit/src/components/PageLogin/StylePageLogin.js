@@ -89,23 +89,9 @@ flex-direction: column;
 align-items: center;
 width: 100%;
 `
-// export const TituloPostagem = styled.input`
-// margin: 5px;
-// width: 100%;
-// `
+export const ContainerPublicacao = styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
 
-// export const ContainerPostagem = styled.div`
-// display: grid;
-// grid-template-columns: 1fr 1fr 1fr 1fr;
-// width: 100%;
-// `
-
-// export const FormularioPostagem = styled.form`
-// grid-column: 2/4;
-// width: 100%;
-// height: 100%;
-// `
-
-// display: grid;
-// grid-template-columns: 1fr 1fr 1fr 1fr;
-// width: 100%;
+`

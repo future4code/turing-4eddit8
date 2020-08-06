@@ -3,6 +3,8 @@ import React, { useContext } from 'react'
 import PostDetailContent from '../../contexts/PostDetailContext'
 import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
+import {Botao} from "../PageLogin/StylePageLogin"
+
 function VoteComment(props) {
 
     const post = useContext(PostDetailContent)
@@ -53,9 +55,17 @@ function VoteComment(props) {
 
     return (
         <div>
-            <button onClick={onClickGostei}>↑</button>
+            <Botao
+            onClick={onClickGostei}
+            cor={props.commentVoteDirection === 1 ? "green" : "white"}
+            corTexto={props.commentVoteDirection === 1 ? "white" : "black"}>↑
+            </Botao>
             <p>{props.commentVotesCount}</p>
-            <button onClick={onClickNaoGostei}>↓</button>
+            <Botao
+            onClick={onClickNaoGostei}
+            cor={props.commentVoteDirection === -1 ? "red" : "white"}
+            corTexto={props.commentVoteDirection === -1 ? "white" : "black"}>↓
+            </Botao>
         </div>
     )
 }
