@@ -20,6 +20,7 @@ function RenderComments() {
                             <VoteComment 
                                 commentId={comentario.id}
                                 commentVoteDirection={comentario.userVoteDirection}
+                                commentVotesCount={comentario.votesCount}
                             />
                         </div>
                     ) 
