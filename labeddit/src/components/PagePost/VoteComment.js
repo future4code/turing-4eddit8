@@ -9,20 +9,39 @@ function VoteComment(props) {
     const requestVoteComment = useContext(RequestVoteCommentContext)
 
     const onClickGostei = () => {
-        const body = {
-            direction: 1
-        }
+        if (props.commentVoteDirection !==1) {
+            const body = {
+                direction: 1
+            }
+            const commentId = props.commentId
 
-        const commentId = props.commentId
+            const postId = post.id
 
-        const postId = post.id
-
-        requestVoteComment(body, postId, commentId)
+            requestVoteComment(body, postId, commentId)
+        } else {
+            onClickDeleteVote()
+        }    
     }
 
     const onClickNaoGostei = () => {
+        if (props.commentVoteDirection !== -1) {
+            const body = {
+                direction: -1
+            }
+    
+            const commentId = props.commentId
+    
+            const postId = post.id
+    
+            requestVoteComment(body, postId, commentId)
+        } else {
+            onClickDeleteVote()
+        }  
+    }
+
+    const onClickDeleteVote = () => {
         const body = {
-            direction: -1
+            direction: 0
         }
 
         const commentId = props.commentId

@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 
 import VoteComment from './VoteComment'
-import DeleteVote from './DeleteVote'
 
 import CommentsContext from '../../contexts/CommentsContext'
 
@@ -20,9 +19,7 @@ function RenderComments() {
                             <p>{comentario.votesCount}</p>
                             <VoteComment 
                                 commentId={comentario.id}
-                            />
-                            <DeleteVote 
-                                commentId={comentario.id}
+                                commentVoteDirection={comentario.userVoteDirection}
                             />
                         </div>
                     ) 

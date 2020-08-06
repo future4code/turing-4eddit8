@@ -28,21 +28,30 @@ function RenderPost() {
 
     }
 
-    const onClickGostei = () => {
-        const body = {
-            direction: 1
+    const onClickGostei = (Direcao) => {
+       
+        if (Direcao !== 1) {
+            const body = {
+                direction: 1
+            }
+            const idPost = post.id
+            requestVotePost(body, idPost)
+        } else {
+            onClickDeleteVote()
         }
-        const idPost = post.id
-
-        requestVotePost(body, idPost)
+        
     }
 
-    const onClickNaoGostei = () => {
-        const body = {
-            direction: -1
+    const onClickNaoGostei = (Direcao) => {
+        if (Direcao !== -1) {
+            const body = {
+                direction: -1
+            }
+            const idPost = post.id
+            requestVotePost(body, idPost)
+        } else {
+            onClickDeleteVote()
         }
-        const idPost = post.id
-        requestVotePost(body, idPost)
     }
 
     const onClickDeleteVote = () => {
@@ -61,9 +70,9 @@ function RenderPost() {
             <p>{post.text} </p>
             <p>{post.votesCount}</p> 
             <p>{post.commentsCount}</p>
-            <button onClick={onClickGostei}>↑</button>
-            <button onClick={onClickDeleteVote}>0</button>
-            <button onClick={onClickNaoGostei}>↓</button>
+            <button onClick={() => onClickGostei(post.userVoteDirection)}>↑</button>
+            <button>{post.votesCount}</button>
+            <button onClick={() => onClickNaoGostei(post.userVoteDirection)}>↓</button>
         </div>
     )
 }
