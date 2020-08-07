@@ -4,7 +4,7 @@ import axios from 'axios';
 import useInput from '../../hooks/useInput'
 import {Botao, ContainerCard, ContainerCards, 
 ContainerInfo, TextoPostagem, 
-TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao} from "../PageLogin/StylePageLogin"
+TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
 const token = window.localStorage.getItem("token")
@@ -185,19 +185,19 @@ function PageFeed() {
                                     </div>
                                     <p>Comentários: {post.commentsCount}</p>
                                 </ContainerInfo>
-                                    <div>
+                                    <ContainerBotaoVotos>
                                         <Botao 
                                         cor={post.userVoteDirection === 1 ? "green" : "white"}
                                         corTexto={post.userVoteDirection === 1 ? "white" : "black"}
                                         onClick={()=> curtir(post)}>↑
                                         </Botao>
-                                        <span>{post.votesCount}</span>
+                                        <p>{post.votesCount}</p>
                                         <Botao 
                                         cor={post.userVoteDirection === -1 ? "red" : "white"}
                                         corTexto={post.userVoteDirection === -1 ? "white" : "black"}
                                         onClick={()=> naoCurti(post)}>↓
                                         </Botao>
-                                    </div>
+                                    </ContainerBotaoVotos>
                             </ContainerCard>
             
                         </ContainerCards>

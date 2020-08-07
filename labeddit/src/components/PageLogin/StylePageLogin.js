@@ -42,6 +42,9 @@ outline: none;
 border: 1px solid black;
 width: 8%;
 margin: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 export const ContainerCard = styled.div`
@@ -93,5 +96,9 @@ export const ContainerPublicacao = styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
-
 `
+
+export const ContainerBotaoVotos = styled.div`
+width: 100%;
+display: flex;
+` 

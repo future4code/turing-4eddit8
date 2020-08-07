@@ -4,8 +4,7 @@ import VoteComment from './VoteComment'
 
 import CommentsContext from '../../contexts/CommentsContext'
 
-import {ContainerCard, ContainerCards, 
-    ContainerInfo,ContainerPublicacao} from "../PageLogin/StylePageLogin"
+import {ContainerCard, ContainerCards, ContainerInfo,ContainerPublicacao} from "../PageLogin/StylePageLogin"
 
 function RenderComments() {
 
@@ -28,7 +27,6 @@ function RenderComments() {
                                 <div>
                                     <p>{comentario.text}</p>
                                 </div>
-                                <p>Comentários: {comentario.commentsCount}</p>
                             </ContainerInfo>
                                 <div>
                                     <VoteComment 

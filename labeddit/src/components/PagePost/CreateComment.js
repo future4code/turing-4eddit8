@@ -7,6 +7,8 @@ import { baseUrl } from '../PageLogin/PageLogin'
 import PostDetailContext from '../../contexts/PostDetailContext'
 import requestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
+import {ContainerPublicacao, ContainerPostagem, FormularioPostagem, TextoPostagem} from '../PageLogin/StylePageLogin'
+
 function CreateComment(props) {
 
     const {form, onChange, resetaEntrada} = useInput({
@@ -50,15 +52,23 @@ function CreateComment(props) {
 
     return (
         <div>
-            <form onSubmit={handleSave}>
-                <input 
-                    name="comentario" 
-                    type="text" 
-                    value={form.comentario}
-                    onChange={handleInputChange}
-                />
-                <button>Comentar</button>
-            </form>
+            <ContainerPublicacao>
+                <h1>Criar Comentário</h1>
+            </ContainerPublicacao>
+            <ContainerPostagem>
+                <FormularioPostagem onSubmit={handleSave}>
+                        <TextoPostagem 
+                            name="comentario" 
+                            type="text" 
+                            value={form.comentario}
+                            onChange={handleInputChange}
+                            placeholder="Não há limites de caracteres, para você não limitar o seu pensamento, 
+                            então digite aqui o seu comentário."
+                            required
+                        />
+                    <button>Comentar</button>
+                </FormularioPostagem>
+            </ContainerPostagem>
         </div>
     )
 }

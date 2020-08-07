@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import PostDetailContent from '../../contexts/PostDetailContext'
 import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
-import {Botao} from "../PageLogin/StylePageLogin"
+import {Botao, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
 
 function VoteComment(props) {
 
@@ -54,7 +54,7 @@ function VoteComment(props) {
     }
 
     return (
-        <div>
+        <ContainerBotaoVotos>
             <Botao
             onClick={onClickGostei}
             cor={props.commentVoteDirection === 1 ? "green" : "white"}
@@ -66,7 +66,7 @@ function VoteComment(props) {
             cor={props.commentVoteDirection === -1 ? "red" : "white"}
             corTexto={props.commentVoteDirection === -1 ? "white" : "black"}>↓
             </Botao>
-        </div>
+        </ContainerBotaoVotos>
     )
 }
 

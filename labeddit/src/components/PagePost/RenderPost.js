@@ -6,7 +6,7 @@ import { baseUrl } from '../PageLogin/PageLogin'
 import PostDetailContext from '../../contexts/PostDetailContext'
 import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
-import {Botao,ContainerCard,ContainerCards,ContainerInfo} from "../PageLogin/StylePageLogin"
+import {Botao,ContainerCard,ContainerCards,ContainerInfo, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
 
 function RenderPost() {
 
@@ -86,19 +86,19 @@ function RenderPost() {
                     </div>
                     <p>Comentários: {post.commentsCount}</p>
                 </ContainerInfo>
-                    <div>
+                    <ContainerBotaoVotos>
                         <Botao 
                         cor={post.userVoteDirection === 1 ? "green" : "white"}
                         corTexto={post.userVoteDirection === 1 ? "white" : "black"}
                         onClick={() => onClickGostei(post.userVoteDirection)}>↑
                         </Botao>
-                        <span>{post.votesCount}</span>
+                        <p>{post.votesCount}</p>
                         <Botao 
                         cor={post.userVoteDirection === -1 ? "red" : "white"}
                         corTexto={post.userVoteDirection === -1 ? "white" : "black"}
                         onClick={() => onClickNaoGostei(post.userVoteDirection)}>↓
                         </Botao>
-                    </div>
+                    </ContainerBotaoVotos>
             </ContainerCard>
 
         </ContainerCards>
