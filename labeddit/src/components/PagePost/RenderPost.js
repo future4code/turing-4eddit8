@@ -65,17 +65,6 @@ function RenderPost() {
     }
 
     return (
-        // <div>
-        //     <h1>Post</h1>
-        //     <p>{post.username}</p>
-        //     <p>{post.title}</p> 
-        //     <p>{post.text} </p>
-        //     <p>{post.votesCount}</p> 
-        //     <p>{post.commentsCount}</p>
-        //     <button onClick={() => onClickGostei(post.userVoteDirection)}>↑</button>
-        //     <button>{post.votesCount}</button>
-        //     <button onClick={() => onClickNaoGostei(post.userVoteDirection)}>↓</button>
-        // </div>
          <ContainerCards>
             <ContainerCard>
                 <ContainerInfo>

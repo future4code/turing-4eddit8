@@ -9,6 +9,15 @@ justify-content: center;
 align-items: center;
 `
 
+export const ContainerSignUp = styled.div`
+width: 100%;
+height: 75vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+
 export const ContainerGeralPageLogin = styled.div`
 display: flex;
 `

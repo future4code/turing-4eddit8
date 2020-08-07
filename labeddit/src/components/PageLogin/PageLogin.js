@@ -61,7 +61,7 @@ function PageLogin() {
             <ContainerLogin>
                 <FormularioLogin onSubmit={handleSave}>
                     <ContainerInput>
-                        <TextoLogin>Login</TextoLogin>
+                        <TextoLogin>Email</TextoLogin>
                         <input 
                             name="email" 
                             type="email" 
