@@ -7,7 +7,7 @@ import { baseUrl } from '../PageLogin/PageLogin'
 import PostDetailContext from '../../contexts/PostDetailContext'
 import requestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
-import {ContainerPublicacao, ContainerPostagem, FormularioPostagem, TextoPostagem} from '../PageLogin/StylePageLogin'
+import {ContainerPublicacao, ContainerPostagem, FormularioPostagem, TextoPostagem, BotaoCriaPost} from '../PageLogin/StylePageLogin'
 
 function CreateComment(props) {
 
@@ -57,6 +57,7 @@ function CreateComment(props) {
             </ContainerPublicacao>
             <ContainerPostagem>
                 <FormularioPostagem onSubmit={handleSave}>
+                    <div>
                         <TextoPostagem 
                             name="comentario" 
                             type="text" 
@@ -66,7 +67,8 @@ function CreateComment(props) {
                             então digite aqui o seu comentário."
                             required
                         />
-                    <button>Comentar</button>
+                    </div>
+                    <BotaoCriaPost>Comentar</BotaoCriaPost>
                 </FormularioPostagem>
             </ContainerPostagem>
         </div>

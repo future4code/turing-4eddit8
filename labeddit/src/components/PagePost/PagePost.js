@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { baseUrl } from '../PageLogin/PageLogin'
 import { initialState, PostReducer } from '../../reducers/PostReducer'
-import { ContainerAlturaMinimo } from '../PageLogin/StylePageLogin'
+import { ContainerAlturaMinimo, BotaoVoltar } from '../PageLogin/StylePageLogin'
 
 import RenderPost from './RenderPost'
 import RenderComments from './RenderComments'
@@ -92,7 +92,7 @@ function PagePost() {
                             <RenderComments />
                         </RequestVoteCommentContext.Provider>
                     </CommentsContext.Provider>
-                    <button onClick={goToPageFeed}> Voltar </button>
+                    <BotaoVoltar onClick={goToPageFeed}> Voltar </BotaoVoltar>
                 </RequestDetailPostContext.Provider>
             </PostDetailContext.Provider>
         </ContainerAlturaMinimo>

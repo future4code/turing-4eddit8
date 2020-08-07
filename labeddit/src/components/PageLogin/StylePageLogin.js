@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 
 export const ContainerLogin = styled.div`
-width: 100%;
-height: 80vh;
+width: 50%;
+height: 75vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+`
+
+export const ContainerGeralPageLogin = styled.div`
+display: flex;
 `
 
 export const ContainerPageSignup = styled.div`
@@ -17,6 +21,14 @@ height: 80vh;
 export const ContainerAlturaMinimo = styled.div`
 width: 100%;
 min-height: 80vh;
+`
+
+export const InfoCadastro = styled.div`
+width: 50%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
 `
 
 export const FormularioLogin = styled.form`
@@ -40,6 +52,23 @@ width: 5vw;
 height: 5vh;
 border-style: none;
 border-radius: 2px;
+font-size: 16px;
+font-weight: bold;
+`
+
+export const TextoLogin = styled.label`
+font-size: 16px;
+font-weight: bold;
+`
+
+export const BotaoCadastrar = styled.button`
+background-color: #ff4500;
+width: 10vw;
+height: 5vh;
+border-style: none;
+border-radius: 2px;
+font-size: 16px;
+font-weight: bold;
 `
 
 export const Botao = styled.button`
@@ -68,7 +97,7 @@ padding: 20px;
 `
 
 export const ContainerInfo = styled.div`
-
+cursor: pointer;
 `
 
 export const ContainerCards =  styled.div`
@@ -114,4 +143,27 @@ justify-content: center;
 export const ContainerBotaoVotos = styled.div`
 width: 100%;
 display: flex;
-` 
+`
+
+export const BotaoCriaPost = styled.button`
+width: 8vw;
+height: 3vw;
+background-color: #ff4500;
+border-style: none;
+border-radius: 3px;
+font-weight: bold;
+font-size: 16px;
+`
+
+export const BotaoVoltar = styled.button`
+width: 5vw;
+height: 3vw;
+background-color: white;
+color: #ff4500;
+font-size: 16px;
+font-weight: bold;
+border-style: none;
+outline: none;
+cursor: pointer;
+margin-left: 5vw;
+`
