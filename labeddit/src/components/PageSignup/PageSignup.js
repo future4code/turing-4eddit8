@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios';
 import useInput from '../../hooks/useInput'
+import {ContainerPageSignup} from '../PageLogin/StylePageLogin'
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
   
@@ -49,7 +50,7 @@ function PageSignup() {
     }
 
     return (
-        <div>
+        <ContainerPageSignup>
             <button onClick={goToLogin}>Voltar</button>
             Page=>Signup
             <form onSubmit={handleSave}>
@@ -58,7 +59,7 @@ function PageSignup() {
                 <input onChange={handleInputChange} name={"senha"} value={form.senha} placeholder={"Senha"} type={"password"} required/>
                 <button>Cadastrar</button>
             </form>
-        </div>
+        </ContainerPageSignup>
     )
 }
 

@@ -2,10 +2,21 @@ import styled from 'styled-components'
 
 export const ContainerLogin = styled.div`
 width: 100%;
+height: 80vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+`
+
+export const ContainerPageSignup = styled.div`
+width: 100%;
+height: 80vh;
+`
+
+export const ContainerAlturaMinimo = styled.div`
+width: 100%;
+min-height: 80vh;
 `
 
 export const FormularioLogin = styled.form`
@@ -86,12 +97,14 @@ flex-direction: row;
 justify-content: center;
 width: 100%;
 `
+
 export const FormularioPostagem = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
 width: 100%;
 `
+
 export const ContainerPublicacao = styled.div`
 width: 100%;
 display: flex;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import useInput from '../../hooks/useInput'
 import {Botao, ContainerCard, ContainerCards, 
 ContainerInfo, TextoPostagem, 
-TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
+TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao, ContainerBotaoVotos, ContainerAlturaMinimo} from "../PageLogin/StylePageLogin"
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
 const token = window.localStorage.getItem("token")
@@ -157,7 +157,7 @@ function PageFeed() {
     } */
 
     return (
-        <div>
+        <ContainerAlturaMinimo>
             <div>
                 <ContainerPublicacao>
                     <h1>Criar publicação</h1>
@@ -203,7 +203,7 @@ function PageFeed() {
                         </ContainerCards>
                         )
             })}
-        </div>
+        </ContainerAlturaMinimo>
     )
 }
 
