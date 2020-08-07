@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import useInput from '../../hooks/useInput'
 import {Botao, ContainerCard, ContainerCards, 
@@ -20,7 +20,6 @@ function PageFeed() {
     const [comentario, setComentario]= useState("")
     
     const history = useHistory()
-    const pathParams = useParams()
     
     useEffect(() => {
         const token = window.localStorage.getItem("token")
@@ -28,10 +27,12 @@ function PageFeed() {
         if (token === null) {
             history.push("/")
         }
-
-        pegaPosts()
         
     }, [history])
+
+    useEffect(() => {
+        pegaPosts()
+    }, [])
     
     const goToPost = (idPost) => {
         history.push(`/post/${idPost}`)
@@ -48,13 +49,10 @@ function PageFeed() {
         criaPost()
     }
     
-    useEffect(()=>{
-        pegaPosts()
-    },[])
-    
-    const pegaPosts = ()=>{
-        axios
-        .get(`${url}/posts`,{
+    const pegaPosts = () => {
+        const token = window.localStorage.getItem("token")
+
+        axios.get(`${url}/posts`,{
             headers:{
                 Authorization: token
             }
@@ -68,12 +66,14 @@ function PageFeed() {
     }
     
     const criaPost = () => {
+        const token = window.localStorage.getItem("token")
+
         const body={
             "text": form.textoPost,
 	        "title": form.tituloPost
         }
-        axios
-        .post(`${url}/posts`, body, {
+        
+        axios.post(`${url}/posts`, body, {
             headers:{
                 Authorization: token
             }
@@ -117,8 +117,8 @@ function PageFeed() {
     }
     
     const votar = (post, body)=>{
-        axios
-        .put(`${url}/posts/${post.id}/vote`, body, {
+        const token = window.localStorage.getItem("token")
+        axios.put(`${url}/posts/${post.id}/vote`, body, {
             headers:{
                 Authorization: token
             }
@@ -136,27 +136,6 @@ function PageFeed() {
     const onChangeInput =(event)=>{
         setComentario(event.target.value)
     }
-    /* const comentar = (postId)=>{
-        if(comentario !== ""){
-            const body ={
-                "text": comentario
-            }
-            axios 
-            .post(`${url}/posts/${postId}/comment`, body, {
-                headers:{
-                    Authorization: token
-                }
-            })
-            .then(()=>{
-                console.log("Entrei no then")
-            })
-            .catch(err=>{
-                console.log(err.message)
-            })
-        }else{
-            alert("Digita algo animal")
-        }
-    } */
 
     return (
         <ContainerAlturaMinimo>
@@ -210,4 +189,3 @@ function PageFeed() {
 }
 
 export default PageFeed
-{/* <input placeholder={"Comentar"} value={comentario} onChange={onChangeInput}/> <button onClick={()=> comentar(post.id)}>Comentar</button> */}
