@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import { baseUrl } from '../PageLogin/PageLogin'
 import { initialState, PostReducer } from '../../reducers/PostReducer'
+import { ContainerAlturaMinimo, BotaoVoltar } from '../PageLogin/StylePageLogin'
 
 import RenderPost from './RenderPost'
 import RenderComments from './RenderComments'
@@ -77,22 +78,24 @@ function PagePost() {
     }
 
     return(
-        <PostDetailContext.Provider value={state.post}>
-            <RequestDetailPostContext.Provider value={requestDetailPost}>
-                <div>
-                    <RenderPost />
-                </div>
-                <div>
-                    <CreateComment />
-                </div>
-                <CommentsContext.Provider value={state.comment}>
-                    <RequestVoteCommentContext.Provider value={requestVoteComment}>
-                        <RenderComments />
-                    </RequestVoteCommentContext.Provider>
-                </CommentsContext.Provider>
-                <button onClick={goToPageFeed}> Voltar </button>
-            </RequestDetailPostContext.Provider>
-        </PostDetailContext.Provider>
+        <ContainerAlturaMinimo>
+            <PostDetailContext.Provider value={state.post}>
+                <RequestDetailPostContext.Provider value={requestDetailPost}>
+                    <div>
+                        <RenderPost />
+                    </div>
+                    <div>
+                        <CreateComment />
+                    </div>
+                    <CommentsContext.Provider value={state.comment}>
+                        <RequestVoteCommentContext.Provider value={requestVoteComment}>
+                            <RenderComments />
+                        </RequestVoteCommentContext.Provider>
+                    </CommentsContext.Provider>
+                    <BotaoVoltar onClick={goToPageFeed}> Voltar </BotaoVoltar>
+                </RequestDetailPostContext.Provider>
+            </PostDetailContext.Provider>
+        </ContainerAlturaMinimo>
     )
 }
 

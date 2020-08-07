@@ -4,8 +4,7 @@ import VoteComment from './VoteComment'
 
 import CommentsContext from '../../contexts/CommentsContext'
 
-import {ContainerCard, ContainerCards, 
-    ContainerInfo,ContainerPublicacao} from "../PageLogin/StylePageLogin"
+import {ContainerCard, ContainerCards, ContainerInfo,ContainerPublicacao} from "../PageLogin/StylePageLogin"
 
 function RenderComments() {
 
@@ -28,7 +27,6 @@ function RenderComments() {
                                 <div>
                                     <p>{comentario.text}</p>
                                 </div>
-                                <p>Comentários: {comentario.commentsCount}</p>
                             </ContainerInfo>
                                 <div>
                                     <VoteComment 
@@ -47,20 +45,3 @@ function RenderComments() {
     )
 }       
 export default RenderComments
-        // <div>
-        //     <h1>Comentários</h1>
-        //     {comment.map((comentario) => {
-        //             return (
-        //                 <div key={comentario.id}>
-        //                     <p>{comentario.username}</p>
-        //                     <p>{comentario.text}</p>
-        //                     <p>{comentario.votesCount}</p>
-        //                     <VoteComment 
-        //                         commentId={comentario.id}
-        //                         commentVoteDirection={comentario.userVoteDirection}
-        //                         commentVotesCount={comentario.votesCount}
-        //                     />
-        //                 </div>
-        //             ) 
-        //     })}
-        // </div>

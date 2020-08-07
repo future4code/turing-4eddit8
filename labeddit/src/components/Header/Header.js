@@ -19,6 +19,12 @@ width: 5%;
 height: 5vh;
 border-style: none;
 border-radius: 2px;
+margin-right: 5vw;
+`
+
+const Logo = styled.h1`
+margin-left: 5vw;
+cursor: pointer;
 `
 
 function Header() {
@@ -45,9 +51,13 @@ function Header() {
         }
     }
 
+    const goToFeed = () => {
+        history.push("/")
+    }
+
     return(
         <Cabecalho>
-            <h1>LabEddit</h1>
+            <Logo onClick={goToFeed}>LabEddit</Logo>
             {renderizaNaTela()}
         </Cabecalho>
     )

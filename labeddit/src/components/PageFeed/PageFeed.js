@@ -4,10 +4,11 @@ import axios from 'axios';
 import useInput from '../../hooks/useInput'
 import {Botao, ContainerCard, ContainerCards, 
 ContainerInfo, TextoPostagem, 
-TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao} from "../PageLogin/StylePageLogin"
+TituloPostagem, ContainerPostagem, FormularioPostagem, ContainerPublicacao, ContainerBotaoVotos, ContainerAlturaMinimo, BotaoCriaPost} from "../PageLogin/StylePageLogin"
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
 const token = window.localStorage.getItem("token")
+
 function PageFeed() {
     
     const { form, onChange, resetaEntrada } = useInput({
@@ -27,8 +28,10 @@ function PageFeed() {
         if (token === null) {
             history.push("/")
         }
+
+        pegaPosts()
         
-    }, [])
+    }, [history])
     
     const goToPost = (idPost) => {
         history.push(`/post/${idPost}`)
@@ -57,7 +60,6 @@ function PageFeed() {
             }
         })
         .then(response=>{
-            console.log(response.data)
             setPost(response.data.posts)
         })
         .catch((err)=>{
@@ -157,7 +159,7 @@ function PageFeed() {
     } */
 
     return (
-        <div>
+        <ContainerAlturaMinimo>
             <div>
                 <ContainerPublicacao>
                     <h1>Criar publicação</h1>
@@ -168,7 +170,7 @@ function PageFeed() {
                         <div>
                             <TextoPostagem onChange={handleInputChange} name={"textoPost"} value={form.textoPost} placeholder={"Escreva seu Post"} type={"text"} required/>
                         </div>
-                        <button>Criar Post</button>
+                        <BotaoCriaPost>Criar Post</BotaoCriaPost>
                     </FormularioPostagem>
                 </ContainerPostagem>
             </div>
@@ -185,25 +187,25 @@ function PageFeed() {
                                     </div>
                                     <p>Comentários: {post.commentsCount}</p>
                                 </ContainerInfo>
-                                    <div>
+                                    <ContainerBotaoVotos>
                                         <Botao 
                                         cor={post.userVoteDirection === 1 ? "green" : "white"}
                                         corTexto={post.userVoteDirection === 1 ? "white" : "black"}
                                         onClick={()=> curtir(post)}>↑
                                         </Botao>
-                                        <span>{post.votesCount}</span>
+                                        <p>{post.votesCount}</p>
                                         <Botao 
                                         cor={post.userVoteDirection === -1 ? "red" : "white"}
                                         corTexto={post.userVoteDirection === -1 ? "white" : "black"}
                                         onClick={()=> naoCurti(post)}>↓
                                         </Botao>
-                                    </div>
+                                    </ContainerBotaoVotos>
                             </ContainerCard>
             
                         </ContainerCards>
                         )
             })}
-        </div>
+        </ContainerAlturaMinimo>
     )
 }
 
