@@ -2,7 +2,9 @@ import React from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios';
 import useInput from '../../hooks/useInput'
-import {ContainerPageSignup} from '../PageLogin/StylePageLogin'
+import {ContainerPageSignup, ContainerSignUp, FormularioLogin,
+    ContainerInput,BotaoCadastrar, TextoLogin,
+BotaoVoltar} from '../PageLogin/StylePageLogin'
 
 const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
   
@@ -51,14 +53,45 @@ function PageSignup() {
 
     return (
         <ContainerPageSignup>
-            <button onClick={goToLogin}>Voltar</button>
-            Page=>Signup
-            <form onSubmit={handleSave}>
-                <input onChange={handleInputChange} name={"nomeUsuario"} value={form.nomeUsuario} placeholder={"Nome de usuário"} type={"text"} required/>
-                <input onChange={handleInputChange} name={"email"} value={form.email} placeholder={"Email"} type={"email"} required/>
-                <input onChange={handleInputChange} name={"senha"} value={form.senha} placeholder={"Senha"} type={"password"} required/>
-                <button>Cadastrar</button>
-            </form>
+            <BotaoVoltar onClick={goToLogin}>Voltar</BotaoVoltar>
+            <ContainerSignUp>
+                <FormularioLogin onSubmit={handleSave}>
+                    <ContainerInput>
+                        <TextoLogin>Nome de Usuário</TextoLogin>
+                        <input
+                            onChange={handleInputChange}
+                            name={"nomeUsuario"}
+                            value={form.nomeUsuario} 
+                            placeholder={"Nome de usuário"}
+                            type={"text"} 
+                            required
+                        />
+                    </ContainerInput>
+                    <ContainerInput>
+                        <TextoLogin>Email</TextoLogin>
+                        <input 
+                            onChange={handleInputChange} 
+                            name={"email"} value={form.email} 
+                            placeholder={"Email"} 
+                            type={"email"} 
+                            required
+                        />
+                    </ContainerInput>
+                    <ContainerInput>
+                        <TextoLogin>Senha</TextoLogin>
+                        <input 
+                            onChange={handleInputChange} 
+                            name={"senha"} value={form.senha} 
+                            placeholder={"Senha"} 
+                            type={"password"} 
+                            required
+                        />
+                    </ContainerInput>
+                    <ContainerInput>
+                        <BotaoCadastrar>Cadastrar</BotaoCadastrar>
+                    </ContainerInput>
+                </FormularioLogin>
+            </ContainerSignUp>
         </ContainerPageSignup>
     )
 }
